@@ -3,6 +3,8 @@
 .idea
 .vscode
 .history
+mysql_data/*
+package managers/*
 
 /www/*
 !/www/.gitkeep

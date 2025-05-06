@@ -1,9 +1,6 @@
 # Docker под 1С-Битрикс
 Сборка представляет собой связку:
 nginx + php-fpm + mysql + memcached
-
-Сборка для работы внутри папки `/local` https://github.com/BendeRsay/local-docker
-
 Подходит для версии 1С-Битрикc: Управление сайтом. Поддерживает технологию композитный сайт. Работает в https или http.
 
 Здесь и дальше `localhost` может быть изменен на любой домен, который указывается в `.env`, а так же в вашем локальном `.hosts`
@@ -52,7 +49,7 @@ nginx + php-fpm + mysql + memcached
 
 > `make setupclear` - Подразумевается использование: под каждый проект - свой git.
 
-Внимание: 
+Внимание:
  - Для корректной сборки cron образа Docker Compose должен быть больше 2 версии. Проверялось на v2.15.1.
  - Работа в windows только в wsl2.
 
@@ -75,24 +72,19 @@ nginx + php-fpm + mysql + memcached
 Пример хранения данных сессии в **memcached**, настройки файла `bitrix/.settings.php`
 ````php
 return [
-//...        
+//...
     'session' => [
         'value' => [
             'mode' => 'default',
             'handlers' => [
                 'general' => [
-                    'type' => 'memcache',   
+                    'type' => 'memcache',
     			    'host' => 'memcached',
     			    'port' => '11211',
-                ],           
+                ],
             ],
-        ]                   
-    ] 
+        ]
+    ]
 ];
 ````
 Подробней в https://dev.1c-bitrix.ru/learning/course/index.php?COURSE_ID=43&LESSON_ID=14026&LESSON_PATH=3913.3435.4816.14028.14026
-
-## Настройки для портала Битрикс24
-
-1. Перед сборкой и запуском проекта в .env раскомментировать переменную COMPOSE_PROFILES, проверить, что ее значение равно "portal"
-2. Для корректной работы Push&Pull в админ. панели в настройках модуля (bitrix/admin/settings.php?mid=pull&lang=ru) указать "Путь для публикации команд", равным http://push-server-pub:9010/bitrix/pub/ . Либо сделать аналогичные настройки в /bitrix/.setting.php, подробней: https://dev.1c-bitrix.ru/learning/course/index.php?COURSE_ID=41&LESSON_ID=2033
